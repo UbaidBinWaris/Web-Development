@@ -102,10 +102,11 @@ main{
     margin-top: 20px;
 }
 .left{
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     width:50%;
     height: 100%;
     padding: 20px;
+    position: relative;
 }
 .headings{
     font-size: 22px;
@@ -118,6 +119,9 @@ main{
     font-weight: bold;
     margin: 2px 0px;
 }
+.subheading2{
+    font-size: 17px;
+}
 .edu_info{
     color: #449399;
     font-size: 12px;
@@ -125,6 +129,7 @@ main{
     align-items: center;
     position: relative;
     margin-top: 15px;
+    margin-bottom: 30px;
 }
 .edu_info div{
     font-style: italic;
@@ -143,12 +148,41 @@ main{
     left:0;
     margin-top: 30px;
 }
+.other_subjects ul {
+    display: flex;
+    /* margin-top: 5px; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.other_subjects ul li{
+    /* flex-wrap: wrap; */
+    width:48%;
+    font-size: 15px;
+    padding: 3px 0px;
+    /* margin-bottom: 5px; */
+}
+.other_subjects ul li::marker {
+    color: rgb(68, 147, 153); /* Change to your desired color */
+}
+.box2 {
+    position: absolute;
+    background-color:rgb(68, 147, 153);
+    width: 35px;
+    height: 57px;
+    left: -11%;
+  margin-top: 25px;
+}
+.edu2{
+    margin-top: 20px;
+}
 .right{
     background-color: #f0f0f0;
     width:50%;
     height: 100%;
     padding: 20px;
 }
+
 
 /* @media print {
   body {
