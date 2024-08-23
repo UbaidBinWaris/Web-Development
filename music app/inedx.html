@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Page</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 100vh;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Main Styles */
+      main {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      button {
+        /* background-color: #333; */
+        color: rgb(221, 130, 130);
+        border: none;
+        padding: 15px 30px;
+        margin: 10px;
+        font-size: 28px;
+        font-weight: bolder;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .drum:hover {
+        background-size: 130%;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        font-size: 18px;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      footer p {
+        margin: 0;
+        line-height: 1.5;
+      }
+      .drum {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        background-size: 100%;
+        transition: background-size 0.2s ease-in-out;
+      }
+      .w {
+        background-image: url("images/tom1.png");
+      }
+      .a {
+        background-image: url("images/tom2.png");
+      }
+      .s {
+        background-image: url("images/tom3.png");
+      }
+      .d {
+        background-image: url("images/tom4.png");
+      }
+      .j {
+        background-image: url("images/snare.png");
+      }
+      .k {
+        background-image: url("images/crash.png");
+      }
+      .l {
+        background-image: url("images/kick.png");
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1>Music Heading</h1>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+      <button class="drum w">W</button>
+      <button class="drum a">A</button>
+      <button class="drum s">S</button>
+      <button class="drum d">D</button>
+      <button class="drum j">J</button>
+      <button class="drum k">K</button>
+      <button class="drum l">L</button>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>
+        This is a beautiful paragraph that complements the musical theme of this
+        webpage.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

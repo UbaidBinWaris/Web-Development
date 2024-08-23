@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: "Montserrat", sans-serif;
+}
+body{
+    /* background-color: rgba(0, 0, 0, 0); */
+    background-color: rgb(48, 11, 57);
+}
+.upper{
+    text-transform: uppercase;
+}
+main{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Black overlay with opacity */ url("images/backgroung_image.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display:flex ;
+    height:100vh;
+    width: 100vw;
+}
+.main_body{
+    width: 80vw;
+    height: 90vh;
+    margin: auto;
+    background-color: blue;
+    display: flex;
+}
+.main_heading{
+    /* background-color: aqua; */
+    padding: 100px 0px;
+    margin: auto;
+    /* align-items: center; */
+}
+.left{
+    background-color: red;
+    height: 100%;
+    /* position: absolute; */
+    /* display: flex; */
+    width: 50%;
+}
+.text{
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    /* text-align: center; */
+    padding-top: 10px;
+}
+.text span{
+    display: block;
+    /* font-weight: bolder; */
+}
+.right{
+    /* left:50%; */
+    /* transform: translateX(50%); */
+    width:40%;
+    height: 60%;
+    background-color: white;
+}
+signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background to darken the image */
+  }
+  
+  .signin {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+  }
+  
+  h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .error-text {
+    display: block;
+    color: red;
+    font-size: 0.9em;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .upper {
+    display: block;
+    text-transform: uppercase;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  .signup-text, .help-text, .browser-support {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 20px;
+  }
+  
+  .signup-text a, .help-text a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .signup-text a:hover, .help-text a:hover {
+    text-decoration: underline;
+  }
+  
+  .browser-support img {
+    height: 20px;
+    margin: 0 5px;
+  }
