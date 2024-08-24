@@ -39,6 +39,9 @@ body {
   margin-top: 5px;
   position: relative;
 }
+.navbar{
+  display: flex;
+}
 .arrow {
   gap: 20px;
 }
@@ -310,6 +313,9 @@ body {
   height:30px;
   background-color: #1ed760;
 }
+.burger{
+  display: none;
+}
 
 
 
@@ -335,5 +341,11 @@ body {
   position: sticky;
   bottom: 5px;
 }
-
+.navbar{
+  display:none;
+}
+.burger{
+  display: block;
+  cursor: pointer;
+}
 }

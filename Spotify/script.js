@@ -141,17 +141,35 @@ async function update_time() {
     )} / ${formatTime(playing_song.duration)}`;
   });
 }
-async function previous_button() {
-  const playing = document.getElementById("previous_now");
-  console.log(playing);
-}
+// async function mobile_preview() {
+//   const bur = document.querySelector(".burger");
+//   bur.addEventListener("click", async () => {
+//     console.log("hello")
+//   });
+// }
 async function main() {
   await load_display_songs();
   event_player();
 
   player_button();
-  previous_button();
   update_time();
+  // document.addEventListener("DOMContentLoaded", mobile_preview);
+  // mobile_preview();
 }
 
 main();
+
+
+document.addEventListener("DOMContentLoaded", mobile_preview);
+
+async function mobile_preview() {
+  const bur = document.querySelector(".burger");
+  if (bur) {
+    console.log("hello");
+    bur.addEventListener("click", () => {
+      console.log("hello");
+    });
+  } else {
+    console.error("Element with class 'burger' not found");
+  }
+}
