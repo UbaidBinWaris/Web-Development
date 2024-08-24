@@ -143,8 +143,23 @@ async function update_time() {
 }
 async function mobile_preview() {
   const bur = document.querySelector(".burger");
+  const crs = document.querySelector(".cross");
+
   bur.addEventListener("click", async () => {
-    console.log("hello")
+    const leftElement = document.querySelector(".left");
+
+    // Apply the transition to the left property
+    leftElement.style.transition = "left 0.5s ease-in-out";
+    leftElement.style.left = "75%";
+    document.querySelector(".right").style.filter = "blur(3px)";
+  });
+  crs.addEventListener("click", async () => {
+    const leftElement = document.querySelector(".left");
+
+    // Apply the transition to the left property
+    leftElement.style.transition = "left 0.5s ease-in-out";
+    leftElement.style.left = "-110%";
+    document.querySelector(".right").style.filter = "blur(0px)";
   });
 }
 async function main() {
