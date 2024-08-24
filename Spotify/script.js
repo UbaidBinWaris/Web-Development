@@ -2,7 +2,7 @@ console.log("lets write javascript");
 let playing_song = new Audio();
 
 async function get_song_links() {
-  let a = await fetch("http://127.0.0.1:5500/Web%20development/Spotify/Music/");
+  let a = await fetch("http://127.0.0.1:5500/Spotify/Music/");
   let responce = await a.text();
   // console.log(responce);
 
@@ -71,7 +71,7 @@ async function event_player() {
     element.addEventListener("click", async () => {
       playing_song.pause();
 
-      playing_song.src = `http://127.0.0.1:5500/Web%20development/Spotify/Music/${
+      playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${
         element.querySelector("h3").textContent
       }`;
       playing_song.play();
@@ -141,12 +141,12 @@ async function update_time() {
     )} / ${formatTime(playing_song.duration)}`;
   });
 }
-// async function mobile_preview() {
-//   const bur = document.querySelector(".burger");
-//   bur.addEventListener("click", async () => {
-//     console.log("hello")
-//   });
-// }
+async function mobile_preview() {
+  const bur = document.querySelector(".burger");
+  bur.addEventListener("click", async () => {
+    console.log("hello")
+  });
+}
 async function main() {
   await load_display_songs();
   event_player();
@@ -154,22 +154,9 @@ async function main() {
   player_button();
   update_time();
   // document.addEventListener("DOMContentLoaded", mobile_preview);
-  // mobile_preview();
+  mobile_preview();
 }
 
 main();
 
 
-document.addEventListener("DOMContentLoaded", mobile_preview);
-
-async function mobile_preview() {
-  const bur = document.querySelector(".burger");
-  if (bur) {
-    console.log("hello");
-    bur.addEventListener("click", () => {
-      console.log("hello");
-    });
-  } else {
-    console.error("Element with class 'burger' not found");
-  }
-}

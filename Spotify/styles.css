@@ -325,12 +325,14 @@ body {
   margin: auto;
  } 
  .left{
-  background-color: red;
-  position: absolute;
-  z-index: 1;
-  transition: all 0.5s;
-  width:80vw;
-  left:-100%;
+  position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
  }
  .playbar{
   width:95vw;
