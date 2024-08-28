@@ -1,146 +1,199 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
-    margin: 0px;
-    padding: 0px;
-    font-family: "Montserrat", sans-serif;
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Montserrat", sans-serif;
 }
-body{
-    /* background-color: rgba(0, 0, 0, 0); */
-    background-color: rgb(48, 11, 57);
+body {
+  /* background-color: rgba(0, 0, 0, 0); */
+  background-color: rgb(48, 11, 57);
 }
-.upper{
-    text-transform: uppercase;
+.upper {
+  text-transform: uppercase;
 }
-main{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Black overlay with opacity */ url("images/backgroung_image.jpg");
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display:flex ;
-    height:100vh;
-    width: 100vw;
+main {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    /* Black overlay with opacity */ url("images/backgroung_image.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
-.main_body{
-    width: 80vw;
-    height: 90vh;
-    margin: auto;
-    background-color: blue;
-    display: flex;
+.main_body {
+  width: 80vw;
+  height: 90vh;
+  margin: auto;
+  /* background-color: blue; */
+  display: flex;
 }
-.main_heading{
-    /* background-color: aqua; */
-    padding: 100px 0px;
-    margin: auto;
-    /* align-items: center; */
+.main_heading {
+  /* background-color: aqua; */
+  padding: 100px 0px;
+  margin: auto;
+  /* align-items: center; */
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
 }
-.left{
-    background-color: red;
-    height: 100%;
-    /* position: absolute; */
-    /* display: flex; */
-    width: 50%;
+.left {
+  /* background-color: red; */
+  height: 100%;
+  /* position: absolute; */
+  /* display: flex; */
+  width: 50%;
 }
-.text{
-    color: white;
-    font-size: 30px;
-    font-weight: 700;
-    /* text-align: center; */
-    padding-top: 10px;
+.text {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  /* text-align: center; */
+  padding-top: 10px;
 }
-.text span{
+.text span {
+  display: block;
+  /* font-weight: bolder; */
+}
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  /* background-color: #218838; */
+}
+.signin {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 75%;
+  text-align: center;
+}
+#head_det {
+  font-size: 14px;
+  font-weight: bold;
+}
+h3 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  display: flex;
+}
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+.signin input {
+  width: 90%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.error-text {
+  display: block;
+  /* color: red; */
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 40px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0px 15px;
+}
+.forg {
+  text-decoration: none;
+  font-size: 14px;
+  /* font-weight: 600; */
+}
+.upper {
+  display: block;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 20px;
+}
+button {
+  width: 95%;
+  padding: 15px;
+  background-color: rgb(27, 181, 94);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.signup-text {
+  margin-top: 20px;
+}
+.signup-text,
+.help-text,
+.browser-support {
+  font-size: 14px;
+  color: #666;
+}
+.signup-text a,
+.help-text a {
+  color: rgb(0, 110, 153);
+  text-decoration: none;
+  font-weight: 600;
+}
+.signup-text a:hover, .help-text a:hover {
+  text-decoration: underline;
+}
+.browser-support {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  justify-items: center;
+}
+.browser-support img {
+  height: 17px;
+  margin: 0 2px;
+}
+.flex {
+  display: flex;
+}
+
+@media (max-width: 950px) {
+  .main_body {
     display: block;
-    /* font-weight: bolder; */
-}
-.right{
-    /* left:50%; */
-    /* transform: translateX(50%); */
-    width:40%;
-    height: 60%;
-    background-color: white;
-}
-signin-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background to darken the image */
+    flex-wrap: wrap;
+  }
+  .left {
+    width: 100%;
+    height: 50vh;
+  }
+  .main_heading {
+    position: static;
+    padding: 0;
+    padding-top: 50px;
+    bottom: 0;
+    transform: translateY(0);
+  }
+  .main_heading .logo img {
+    width: 85px;
+  }
+  .main_heading .text {
+    font-size: 19px;
+  }
+  .right {
+    width: 100%;
+    margin-bottom: 150px;
+    /* height: 100%; */
   }
   .signin {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 400px;
-  }
-  
-  h3 {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"] {
+    margin: -50px;
+    margin-top: -200px;
     width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 20px;
   }
-  
-  .error-text {
-    display: block;
-    color: red;
-    font-size: 0.9em;
-    text-align: left;
-    margin-bottom: 20px;
+  #head_det{
+    font-weight: normal;
+    display: block ruby;
   }
-  
-  .upper {
-    display: block;
-    text-transform: uppercase;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #218838;
-  }
-  
-  .signup-text, .help-text, .browser-support {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 20px;
-  }
-  
-  .signup-text a, .help-text a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .signup-text a:hover, .help-text a:hover {
-    text-decoration: underline;
-  }
-  
-  .browser-support img {
-    height: 20px;
-    margin: 0 5px;
-  }
+}
