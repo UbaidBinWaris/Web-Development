@@ -32,11 +32,13 @@ header {
   position: absolute;
   left: 0px;
   line-height: 1.5;
+  letter-spacing: 0.04em;
 }
 .name h1 {
   font-size: 30px;
   font-size: 30px;
   font-weight: 400;
+  
 }
 .name h2 {
   font-size: 18px;
@@ -49,8 +51,8 @@ header {
   margin-top: 5px;
 }
 .image {
-  height: 120px;
-  width: 120px;
+  height: 125px;
+  width: 125px;
   border-radius: 50%;
   border: 4px solid #449399;
   position: absolute;
@@ -88,7 +90,7 @@ header {
   position: absolute;
   background-color: #313c4e;
   width: 35px;
-  height: 57px;
+  height: 59px;
   left: -9%;
   margin-top: 10px;
 }
@@ -164,6 +166,9 @@ main {
   font-size: 15px;
   /* padding: 3px 0px; */
   /* margin-bottom: 5px; */
+  margin-top: 3px;
+  margin-left: 14px;
+  width:41%;
 }
 .other_subjects ul li::marker {
   color: rgb(68, 147, 153); /* Change to your desired color */
@@ -172,7 +177,7 @@ main {
   position: absolute;
   background-color: rgb(68, 147, 153);
   width: 35px;
-  height: 57px;
+  height: 59px;
   left: -11%;
   margin-top: 25px;
 }
@@ -233,6 +238,10 @@ main {
 .exp_detail ul {
   font-size: 13px;
   margin-top: 1px;
+}
+.exp_detail ul li{
+  margin-left: -8px;
+  margin-top: 3px;
 }
 .exp_detail ul li::marker {
   color: rgb(68, 147, 153); /* Change to your desired color */

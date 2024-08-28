@@ -66,7 +66,6 @@ signin-container {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background to darken the image */
   }
-  
   .signin {
     background-color: white;
     padding: 30px;

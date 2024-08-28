@@ -1,5 +1,7 @@
 console.log("lets write javascript");
 let playing_song = new Audio();
+var temp;
+var soud_value;
 
 async function get_song_links() {
   let a = await fetch("http://127.0.0.1:5500/Spotify/Music/");
@@ -62,6 +64,46 @@ async function load_display_songs() {
     songDiv.appendChild(songListDiv);
   }
 }
+async function volume() {
+  document.querySelector(".volume_image").innerHTML =
+    '<img src="music_image/low_volume.svg" alt="volume">';
+  document.querySelector(".soundbar").innerHTML =
+    '<input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.49">';
+
+  let vol = document.querySelector(".volume_image");
+  let pitch = document.querySelector(".soundbar").firstElementChild;
+  pitch.addEventListener("input", function () {
+    const sliderValue = pitch.value;
+    playing_song.volume = sliderValue;
+    if (playing_song.volume == 0) {
+      vol.firstElementChild.src =
+        "http://127.0.0.1:5500/Spotify/music_image/mute.svg";
+    } else if (playing_song.volume > 0.5) {
+      vol.firstElementChild.src =
+        "http://127.0.0.1:5500/Spotify/music_image/high_volume.svg";
+    } else {
+      vol.firstElementChild.src =
+        "http://127.0.0.1:5500/Spotify/music_image/low_volume.svg";
+    }
+  });
+  if (vol) {
+    vol.addEventListener("click", () => {
+      if (
+        vol.firstElementChild.src !=
+        "http://127.0.0.1:5500/Spotify/music_image/mute.svg"
+      ) {
+        temp = vol.firstElementChild.src;
+        vol.firstElementChild.src =
+          "http://127.0.0.1:5500/Spotify/music_image/mute.svg";
+        sound_value = playing_song.volume;
+        playing_song.volume = 0;
+      } else {
+        vol.firstElementChild.src = temp;
+        playing_song.volume = sound_value;
+      }
+    });
+  }
+}
 async function event_player() {
   const players = document.querySelectorAll(".lib .song-list");
   // console.log(players)
@@ -84,7 +126,6 @@ async function event_player() {
           element.querySelector("h3").textContent;
         document.querySelector(".live_duration").innerHTML = " 00:00 / 00:00";
       });
-      
     });
   });
 }
@@ -98,7 +139,6 @@ async function player_button() {
     ) {
       return;
     }
-
     if (playing_song.paused) {
       playing_song.play();
       playing.src = "music_image/pause-circle.svg";
@@ -139,6 +179,11 @@ async function update_time() {
     document.querySelector(".live_duration").innerHTML = `${formatTime(
       currentTime
     )} / ${formatTime(playing_song.duration)}`;
+
+    const mus = document.querySelector(".move_music").firstElementChild;
+    mus.value = playing_song.currentTime / playing_song.duration;
+    // mus.style.transition = "all 1s ease";
+    // requestAnimationFrame(update_time);
   });
 }
 async function mobile_preview() {
@@ -162,16 +207,33 @@ async function mobile_preview() {
     document.querySelector(".right").style.filter = "blur(0px)";
   });
 }
+async function musicbar() {
+  const mus = document.querySelector(".move_music").firstElementChild;
+  console.log(mus);
+
+  mus.addEventListener("input", function () {
+    const a = (mus * playing_song.duration) * 100 ;
+    console.log(a);
+  });
+
+
+  
+}
+
 async function main() {
   await load_display_songs();
   event_player();
 
   player_button();
   update_time();
-  // document.addEventListener("DOMContentLoaded", mobile_preview);
+  volume();
   mobile_preview();
+  musicbar();
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  let musicSlider = document.querySelector(".move_music").firstElementChild;
+  musicSlider.value = 0;
+});
+
 main();
-
-
