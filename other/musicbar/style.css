@@ -1,0 +1,24 @@
+body{
+    background-color: rgb(128, 128, 128);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: 100vh;
+}
+.playbar{
+    width:80%;
+    height:5px;
+    background-color: black;
+}
+.pointer{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+    /* left: 100%; */
+    top:-3px;
+    /* transform: translateX(-50%); */
+    /* transition: transform 0.5s ease; */
+}

@@ -2,6 +2,7 @@ console.log("lets write javascript");
 let playing_song = new Audio();
 var temp;
 var soud_value;
+let intervalId;
 
 async function get_song_links() {
   let a = await fetch("http://127.0.0.1:5500/Spotify/Music/");
@@ -27,6 +28,8 @@ async function get_song_links() {
 async function load_display_songs() {
   let songLinks = await get_song_links();
   //   console.log(songLinks);
+
+  document.querySelector(".pointer").style.left = "0%";
 
   let songDiv = document.querySelector(".lib");
 
@@ -68,8 +71,8 @@ async function volume() {
   document.querySelector(".volume_image").innerHTML =
     '<img src="music_image/low_volume.svg" alt="volume">';
   document.querySelector(".soundbar").innerHTML =
-    '<input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.49">';
-
+    '<input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.2">';
+  playing_song.volume = 0.2;
   let vol = document.querySelector(".volume_image");
   let pitch = document.querySelector(".soundbar").firstElementChild;
   pitch.addEventListener("input", function () {
@@ -117,6 +120,7 @@ async function event_player() {
         element.querySelector("h3").textContent
       }`;
       playing_song.play();
+      musicbar();
 
       playing_song.addEventListener("loadedmetadata", () => {
         const durationInSeconds = playing_song.duration;
@@ -141,6 +145,7 @@ async function player_button() {
     }
     if (playing_song.paused) {
       playing_song.play();
+      musicbar();
       playing.src = "music_image/pause-circle.svg";
     } else {
       playing_song.pause();
@@ -208,32 +213,55 @@ async function mobile_preview() {
   });
 }
 async function musicbar() {
-  const mus = document.querySelector(".move_music").firstElementChild;
-  console.log(mus);
+  // if(playing_song.pause)
+  // {
+  //   return;
+  // }
+  clearInterval(intervalId);
+  const x = document.querySelector(".pointer");
+  intervalId = setInterval(() => {
+    const progressPercentage =
+      (playing_song.currentTime / playing_song.duration) * 100;
+    const playbarWidth = x.clientWidth;
+    const pointerPosition = (progressPercentage / 100) * playbarWidth;
 
-  mus.addEventListener("input", function () {
-    const a = (mus * playing_song.duration) * 100 ;
-    console.log(a);
+    x.style.left = `${progressPercentage}%`;
+
+    if (playing_song.ended) {
+      clearInterval(intervalId);
+      x.style.left = "0%";
+      document.getElementById("play_now").src = "music_image/play-circle.svg";
+    }
+  }, 1);
+
+  const play_bar = document.querySelector(".move_music");
+  play_bar.addEventListener("click", (event) => {
+    const playbarRect = play_bar.getBoundingClientRect();
+    const clickX = (event.clientX - playbarRect.left) / 870;
+
+    x.style.left = `${clickX}%`;
+    playing_song.currentTime = clickX * playing_song.duration;
   });
 
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft") {
+      playing_song.currentTime -= 5;
+      // console.log("left");
 
-  
+    }
+    else if (event.key === "ArrowRight") {
+      playing_song.currentTime += 5;
+      // console.log("right");
+    }
+  });
 }
-
 async function main() {
   await load_display_songs();
   event_player();
-
   player_button();
   update_time();
   volume();
   mobile_preview();
-  musicbar();
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  let musicSlider = document.querySelector(".move_music").firstElementChild;
-  musicSlider.value = 0;
-});
 
 main();
