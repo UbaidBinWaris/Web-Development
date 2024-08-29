@@ -234,7 +234,7 @@ body {
   bottom: 7%;
   background-color: rgb(65, 64, 64);
   border-radius: 15px;
-  z-index: 1000;
+  z-index: 2;
 }
 .plabar_head {
   /* background-color: aquamarine; */
@@ -252,7 +252,7 @@ body {
   /* background-color: red; */
   color: #d0d0d0;
   max-height: 45px; 
-  width: 35%;
+  width: 35%; 
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -356,41 +356,42 @@ body {
   border:none; 
   cursor: pointer;
 }
-#music-slider {
-  -webkit-appearance: none; /* Remove default styling for WebKit browsers */
-  -moz-appearance: none; /* Remove default styling for Firefox */
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  background: #7c7c7c;
-  border-radius: 3px; 
-  outline: none;
-  position: relative;
-}
-#music-slider::-moz-range-thumb {
-  width: 17px; 
-  height: 17px; 
-  border-radius: 50%; 
-  background: #333;
-  border:none; 
-  cursor: pointer;
-  /* transition: left 1s ease; */
-}
-/* #music-slider::-webkit-slider-thumb {
-  -webkit-transition: left 1s ease;
-}
-#music-slider::-moz-range-thumb {
-  transition: left 1s ease;
-} */
-
-
 .burger {
   display: none;
 }
 .cross {
   display: none;
 }
-
+.anc_tab nav{
+  padding: 6%;
+}
+.anc_tab nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.anc_tab ul li{
+  list-style-type: none;
+  list-style: none;
+}
+.anc_tab ul li a{
+  text-decoration: none;
+  color: white;
+  font-size: 11px;
+}
+.eng{
+  display: flex;
+  /* gap: 5px; */
+  align-items: center;
+  justify-content: center;
+  width:25%;
+  border:1px solid white;
+  padding: 5px 8px;
+  margin-left: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
 @media (max-width: 1200px) {
   .right {
     width: 95vw;
@@ -428,5 +429,27 @@ body {
     right: 9%;
     top: 25px;
     cursor: pointer;
+  }
+  .playbar{
+    position: fixed;
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30%;
+  }
+  .plabar_head{
+    flex-wrap: wrap;
+  }
+  .song_title{
+    width: 100%;
+    margin-top: 0;
+    height: 100px;
+  }
+  .media_butt{
+    position: relative;
+    top:25%;
+  }
+  .media_butt img{
+    width: 50px;
   }
 }
