@@ -3,13 +3,14 @@ let playing_song = new Audio();
 var temp;
 var soud_value;
 let intervalId;
-let currentSongIndex = 0;
+let currentSongIndex;
 let songLinks = [];
+let folder;
 
-async function get_song_links() {
-  let a = await fetch("http://127.0.0.1:5500/Spotify/Music/");
+async function get_song_links(folder) {
+  let a = await fetch(`http://127.0.0.1:5500/Spotify/Music/${folder}`);
+  // console.log(folder);
   let responce = await a.text();
-  // console.log(responce);
 
   let div = document.createElement("div");
   div.innerHTML = responce;
@@ -21,23 +22,27 @@ async function get_song_links() {
   for (let i = 0; i < as.length; i++) {
     const element = as[i];
     if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split("/Music/")[1]);
+      songs.push(element.href.split(`/${folder}/`)[1]);
     }
   }
 
   return songs;
 }
-async function load_display_songs() {
-  songLinks = await get_song_links();
+async function load_display_songs(list) {
   //   console.log(songLinks);
 
-  document.querySelector(".pointer").style.left = "0%";
-
   let songDiv = document.querySelector(".lib");
+  songDiv.innerHTML = "";
+  if (list.length == 0 || !list) {
+    const dd = document.createElement("div");
+    dd.innerHTML = "<div>No songs found in this folder</div>";
+    document.querySelector(".lib").appendChild(dd);
+    return;
+  }
   // Assuming songLinks contains URL-encoded names
-  for (let i = 0; i < songLinks.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     // Decode the song name
-    let decodedSongName = decodeURIComponent(songLinks[i]);
+    let decodedSongName = decodeURIComponent(list[i]);
 
     // Create a new div with the class 'song-list'
     let songListDiv = document.createElement("div");
@@ -109,20 +114,24 @@ async function volume() {
   }
 }
 async function event_player() {
-  const players = document.querySelectorAll(".lib .song-list");
+  const players = document.querySelectorAll(".song-list");
+  // console.log(players);
 
   players.forEach((element, index) => {
     element.addEventListener("click", async () => {
-      playSongAtIndex(index); // Play the selected song
+      playSongAtIndex(index);
+      // console.log(i);
     });
   });
 }
-function playSongAtIndex(index) {
-  if (index < 0 || index >= songLinks.length) return; // Check for valid index
-  currentSongIndex = index; // Update current song index
+function playSongAtIndex(i) {
+  // console.log(folder);
+  // console.log(songLinks);
+  if (i < 0 || i >= songLinks.length) return;
+  currentSongIndex = i;
 
   playing_song.pause();
-  playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${songLinks[currentSongIndex]}`;
+  playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${folder}/${songLinks[i]}`;
   playing_song.play();
   musicbar();
 
@@ -259,6 +268,13 @@ async function musicbar() {
       clearInterval(intervalId);
       x.style.left = "0%";
       document.getElementById("play_now").src = "music_image/play-circle.svg";
+      if (currentSongIndex < songLinks.length - 1) {
+        currentSongIndex++;
+        playSongAtIndex(currentSongIndex);
+      } else {
+        currentSongIndex = 0; // Loop back to the first song
+        playSongAtIndex(currentSongIndex);
+      }
     }
   }, 1);
 
@@ -286,30 +302,131 @@ async function next_previous() {
   const n = document.getElementById("next_now");
 
   p.addEventListener("click", () => {
-    currentSongIndex--; // Move to the previous song
+    currentSongIndex = currentSongIndex - 1;
     if (currentSongIndex < 0) {
-      currentSongIndex = songLinks.length - 1; // Loop back to the last song
+      currentSongIndex = songLinks.length - 1;
     }
     playSongAtIndex(currentSongIndex);
   });
-
   n.addEventListener("click", () => {
-    currentSongIndex++; // Move to the next song
+    currentSongIndex = currentSongIndex + 1;
     if (currentSongIndex >= songLinks.length) {
-      currentSongIndex = 0; // Loop back to the first song
+      currentSongIndex = 0;
     }
     playSongAtIndex(currentSongIndex);
   });
 }
+async function load_and_display_card(card) {
+  // console.log(card[1]);
+  if (!card || card.length === 0) {
+    alert("No Songs List Found !!!");
+    return null;
+  }
+  const cardContainer = document.querySelector(".card-cointainer");
+
+  for (let i = 0; i < card.length; i++) {
+    const imgSrc = `http://127.0.0.1:5500/Spotify/Music/${card[i]}/Image.jpg`;
+    const cardTitle = card[i];
+    const cd = await fetch(
+      `http://127.0.0.1:5500/Spotify/Music/${card[i]}/description.txt`
+    );
+    const cardDescription = await cd.text();
+
+    // Create the 'plalist-card' div
+    const playlistCardDiv = document.createElement("div");
+    playlistCardDiv.classList.add("plalist-card");
+
+    // Create the 'play' div with an img element inside
+    const playDiv = document.createElement("div");
+    playDiv.classList.add("play", "flex");
+
+    const playImg = document.createElement("img");
+    playImg.src = "image/play-button.svg";
+    playImg.width = 25;
+    playImg.alt = "play-button";
+    playDiv.appendChild(playImg);
+
+    // Create the card image element
+    const cardImg = document.createElement("img");
+    cardImg.classList.add("card_image");
+    cardImg.src = imgSrc;
+    cardImg.alt = "picture";
+
+    // Create the h2 element for the title
+    const h2 = document.createElement("h2");
+    h2.textContent = decodeURIComponent(cardTitle);
+    // h2.textContent = cardTitle;
+
+    // Create the p element for the description
+    const p = document.createElement("p");
+    p.textContent = cardDescription;
+
+    // Append the elements to the 'plalist-card' div
+    playlistCardDiv.appendChild(playDiv);
+    playlistCardDiv.appendChild(cardImg);
+    playlistCardDiv.appendChild(h2);
+    playlistCardDiv.appendChild(p);
+
+    // Append the 'plalist-card' div to the parent container
+    cardContainer.appendChild(playlistCardDiv);
+  }
+}
+async function event_card(card) {
+  // Use block-scoped `let` to ensure `i` is captured correctly
+  for (let i = 0; i < card.length; i++) {
+    const cards = document.querySelectorAll(".plalist-card");
+    cards.forEach((card, index) => {
+      card.addEventListener("click", async () => {
+        // console.log("Card clicked:", index);
+        const h2 = card.querySelector("h2");
+        if (h2) {
+          let f = h2.innerHTML;
+
+          if (f.includes(" ")) {
+            f = f.replace(/ /g, "%20");
+          }
+          folder = f;
+          console.log(folder);
+          songLinks = await get_song_links(folder);
+          await load_display_songs(songLinks);
+          event_player();
+        }
+      });
+    });
+  }
+}
+async function card_container() {
+  let a = await fetch(`http://127.0.0.1:5500/Spotify/Music`);
+  let responce = await a.text();
+  // console.log(a);
+  let as = document.createElement("div");
+  as.innerHTML = responce;
+  let lik = as.querySelectorAll("a");
+  let card = [];
+  // console.log(as);
+  lik.forEach((link) => {
+    let href = link.getAttribute("href");
+
+    // Add a check to exclude parent directory link (if present) and only include valid files/folders
+    if (href && href !== "../ " && href.startsWith("/Spotify/Music/")) {
+      let x = href.split("/Music/", [2]);
+      // folder = x[1];
+      card.push(x[1]);
+    }
+  });
+  // console.log(card);
+
+  await load_and_display_card(card);
+  await event_card(card);
+  document.querySelector(".pointer").style.left = "0%";
+}
 async function main() {
-  await load_display_songs();
-  event_player();
+  await card_container();
+  next_previous();
   player_button();
   update_time();
   volume();
   mobile_preview();
-  next_previous();
-  card_container();
 }
 
 main();
