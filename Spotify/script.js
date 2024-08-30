@@ -6,7 +6,6 @@ let intervalId;
 let currentSongIndex;
 let songLinks = [];
 let folder;
-
 async function get_song_links(folder) {
   let a = await fetch(`http://127.0.0.1:5500/Spotify/Music/${folder}`);
   // console.log(folder);
