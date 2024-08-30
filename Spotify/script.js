@@ -3,6 +3,8 @@ let playing_song = new Audio();
 var temp;
 var soud_value;
 let intervalId;
+let currentSongIndex = 0;
+let songLinks = [];
 
 async function get_song_links() {
   let a = await fetch("http://127.0.0.1:5500/Spotify/Music/");
@@ -26,13 +28,12 @@ async function get_song_links() {
   return songs;
 }
 async function load_display_songs() {
-  let songLinks = await get_song_links();
+  songLinks = await get_song_links();
   //   console.log(songLinks);
 
   document.querySelector(".pointer").style.left = "0%";
 
   let songDiv = document.querySelector(".lib");
-
   // Assuming songLinks contains URL-encoded names
   for (let i = 0; i < songLinks.length; i++) {
     // Decode the song name
@@ -109,30 +110,57 @@ async function volume() {
 }
 async function event_player() {
   const players = document.querySelectorAll(".lib .song-list");
-  // console.log(players)
 
-  players.forEach((element) => {
-    // console.log(element);
+  players.forEach((element, index) => {
     element.addEventListener("click", async () => {
-      playing_song.pause();
-
-      playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${
-        element.querySelector("h3").textContent
-      }`;
-      playing_song.play();
-      musicbar();
-
-      playing_song.addEventListener("loadedmetadata", () => {
-        const durationInSeconds = playing_song.duration;
-        let pause_show = document.getElementById("play_now");
-        pause_show.src = "music_image/pause-circle.svg";
-        document.querySelector(".song_title").innerHTML =
-          element.querySelector("h3").textContent;
-        document.querySelector(".live_duration").innerHTML = " 00:00 / 00:00";
-      });
+      playSongAtIndex(index); // Play the selected song
     });
   });
 }
+function playSongAtIndex(index) {
+  if (index < 0 || index >= songLinks.length) return; // Check for valid index
+  currentSongIndex = index; // Update current song index
+
+  playing_song.pause();
+  playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${songLinks[currentSongIndex]}`;
+  playing_song.play();
+  musicbar();
+
+  playing_song.addEventListener("loadedmetadata", () => {
+    let pause_show = document.getElementById("play_now");
+    pause_show.src = "music_image/pause-circle.svg";
+    document.querySelector(".song_title").innerHTML = decodeURIComponent(
+      songLinks[currentSongIndex]
+    );
+    document.querySelector(".live_duration").innerHTML = " 00:00 / 00:00";
+  });
+}
+// async function event_player() {
+//   const players = document.querySelectorAll(".lib .song-list");
+//   // console.log(players)
+
+//   players.forEach((element) => {
+//     // console.log(element);
+//     element.addEventListener("click", async () => {
+//       playing_song.pause();
+
+//       playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${
+//         element.querySelector("h3").textContent
+//       }`;
+//       playing_song.play();
+//       musicbar();
+
+//       playing_song.addEventListener("loadedmetadata", () => {
+//         const durationInSeconds = playing_song.duration;
+//         let pause_show = document.getElementById("play_now");
+//         pause_show.src = "music_image/pause-circle.svg";
+//         document.querySelector(".song_title").innerHTML =
+//           element.querySelector("h3").textContent;
+//         document.querySelector(".live_duration").innerHTML = " 00:00 / 00:00";
+//       });
+//     });
+//   });
+// }
 async function player_button() {
   const playing = document.getElementById("play_now");
   // console.log(playing);
@@ -247,12 +275,30 @@ async function musicbar() {
     if (event.key === "ArrowLeft") {
       playing_song.currentTime -= 5;
       // console.log("left");
-
-    }
-    else if (event.key === "ArrowRight") {
+    } else if (event.key === "ArrowRight") {
       playing_song.currentTime += 5;
       // console.log("right");
     }
+  });
+}
+async function next_previous() {
+  const p = document.getElementById("previous_now");
+  const n = document.getElementById("next_now");
+
+  p.addEventListener("click", () => {
+    currentSongIndex--; // Move to the previous song
+    if (currentSongIndex < 0) {
+      currentSongIndex = songLinks.length - 1; // Loop back to the last song
+    }
+    playSongAtIndex(currentSongIndex);
+  });
+
+  n.addEventListener("click", () => {
+    currentSongIndex++; // Move to the next song
+    if (currentSongIndex >= songLinks.length) {
+      currentSongIndex = 0; // Loop back to the first song
+    }
+    playSongAtIndex(currentSongIndex);
   });
 }
 async function main() {
@@ -262,6 +308,8 @@ async function main() {
   update_time();
   volume();
   mobile_preview();
+  next_previous();
+  card_container();
 }
 
 main();
