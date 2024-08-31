@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequency Generator</title>
+</head>
+<body>
+    <h1>Frequency Generator</h1>
+    <label for="frequency">Frequency (1 - 1000 Hz): </label>
+    <input type="range" id="frequency" min="1" max="1000" value="440" step="1">
+    <span id="freq-value">440 Hz</span>
+    <button onclick="startOscillator()">Start</button>
+    <button onclick="stopOscillator()">Stop</button>
+
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let oscillator;
+
+        function startOscillator() {
+            if (oscillator) {
+                oscillator.stop(); // Stop any previous oscillator
+            }
+            oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine'; // You can also use 'square', 'sawtooth', 'triangle'
+            oscillator.frequency.setValueAtTime(parseFloat(document.getElementById('frequency').value), audioContext.currentTime);
+            oscillator.connect(audioContext.destination);
+            oscillator.start();
+        }
+
+        function stopOscillator() {
+            if (oscillator) {
+                oscillator.stop();
+                oscillator.disconnect();
+            }
+        }
+
+        document.getElementById('frequency').addEventListener('input', function() {
+            const frequency = this.value;
+            document.getElementById('freq-value').textContent = frequency + ' Hz';
+            if (oscillator) {
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            }
+        });
+    </script>
+</body>
+</html>
