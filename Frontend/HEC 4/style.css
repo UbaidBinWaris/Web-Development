@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+}
+body{
+    background-color: #e0e0e0;
+}
+nav {
+  background-color: rgb(255, 0, 0);
+  background-color: White;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 5px 0px; */
+  height:70px;
+  width:100vw;
+  position:fixed;
+  top:0;
+  z-index: 2;
+}
+nav >div{
+    padding: 5px 50px;
+}
+nav div {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+.hec {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.info img{
+    width:20px;
+}
+.hec h1{
+    font-size: 18px;
+}
+.my{
+    width:30px;
+    height:30px;
+}
+.my img{
+    width: 30px;
+    height:30px;
+    object-position: center;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+}
+nav img {
+  width: 50px;
+}
+
+.left_side_bar{
+    width: 25%;
+    background-color:#d6d6d6;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+    gap: 20px;
+    height:100vh;
+    position: absolute;
+    top:0;
+    overflow-y: auto;
+    z-index: 1;
+}
+.but{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    gap:20px;
+    color:#6c757d;
+}
+.but img{
+    width:20px;
+}
