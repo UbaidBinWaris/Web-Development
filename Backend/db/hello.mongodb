@@ -1,0 +1,5 @@
+use('CRUD_db')
+
+console.log(db)
+
+db.createCollection("courses")
