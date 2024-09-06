@@ -27,7 +27,7 @@ app.get("/genetate", async (req, res) => {
   let random_salary = [10,20,25,4,21];
   let random_cities = ["Islamabad" , "Karachi" , "lahore" , "Quetta"];
 
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < 50; index++) {
     let e = await Employee.create({
       name: get_random(random_names),
       salary: get_random(random_salary),
