@@ -1,10 +1,11 @@
-function App() {
+import Navbar from './componments/Navbar'; 
 
+function App() {
   return (
     <>
-a
+      <Navbar />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

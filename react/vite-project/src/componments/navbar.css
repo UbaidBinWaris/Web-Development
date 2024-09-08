@@ -1,0 +1,15 @@
+.navb ul li {
+    color: black; /* Make sure the color contrasts with the background */
+    text-decoration: none;
+    list-style: none;
+  }
+  .navb ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .navb{
+    background-color: bisque;
+    padding: 23px;
+  }
+  
