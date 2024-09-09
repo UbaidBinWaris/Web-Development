@@ -1,0 +1,15 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    color: white;
+}
+body{
+    background-color: rgb(56, 55, 55);
+}
+.d{
+    background-color: rgb(155, 155, 155);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 2px solid rgb(175, 175, 175);
+}
