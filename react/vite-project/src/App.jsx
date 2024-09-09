@@ -1,16 +1,12 @@
 import Navbar from './componments/Navbar'; 
+import Card from './componments/card'
+import { useState } from 'react';
 
-const click = ()=>{
-  alert('Button Clicked!');
-}
 function App() {
   return (
     <>
-      <div>
-        <button onClick={click}>
-          click me
-        </button>
-      </div>
+    <Navbar />
+    <Card/>
     </>
   );
 }
