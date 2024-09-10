@@ -1,23 +1,78 @@
 import React from "react";
 
 const TODO = () => {
+  const [todos, settodos] = React.useState([]);
+  const [todo, settodo] = React.useState("");
+
+  const handleAdd = () => {
+    if (todo.trim() === "") return;
+    settodos([...todos, { todo, isCompleted: false }]);
+    settodo("");
+  };
+
+  const handleEdit = (index) => {
+    alert("EDIT todo at index: " + index);
+  };
+
+  const handleDelete = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index); // Remove todo by index
+    settodos(newTodos);
+  };
+
+  const inputChange = (e) => {
+    settodo(e.target.value);
+  };
+
   return (
-    <div className="cointainer min-h-[80vh] w-3/4 m-auto my-7 bg-slate-700">
+    <div className="container min-h-[80vh] w-3/4 m-auto my-7 p-3 bg-slate-700">
       <h1>My Todo List</h1>
       <div className="head flex gap-3 w-full px-10 my-2">
         <input
+          value={todo}
+          onChange={inputChange}
           type="text"
           className="bg-transparent p-1 border w-3/4 border-gray-400"
           placeholder="Add a new task"
         />
-        <button className="bg-gray-500 p-1 px-2 hover:bg-gray-400 ">Add</button>
+        <button
+          onClick={handleAdd}
+          className="bg-gray-500 p-1 px-2 hover:bg-gray-400"
+        >
+          Add
+        </button>
       </div>
       <div className="todos">
-        <div className="todo">
-            <span>Lorem ipsum dolor sit amet consectetu.</span>
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
+        {todos.map((item, index) => (
+          <div className="flex">
+            <div className="flex items-center gap-2">
+              <input
+                id="checkbox"
+                type="checkbox"
+                className="form-checkbox h-5 w-5 text-blue-700"
+              />
+            </div>
+            <div
+              key={index}
+              className="flex gap-3 py-2 w-5/6 m-auto my-2 justify-between border bg-gray-800 rounded-xl"
+            >
+              <span className="px-5">{item.todo}</span>
+              <div className="but flex gap-3 px-4 ">
+                <button
+                  onClick={() => handleEdit(index)}
+                  className="bg-yellow-500 rounded-md  py-1 px-3"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 rounded-md  py-1 px-3"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
