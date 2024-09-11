@@ -1,31 +1,32 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const TODO = () => {
   const [todos, settodos] = React.useState([]);
   const [todo, settodo] = React.useState("");
   const [editIndex, setEditIndex] = React.useState(null);
 
+  // Effect to load todos from localStorage
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
-    if (storedTodos) settodos(storedTodos);
-  },[]);
+    if (storedTodos && Array.isArray(storedTodos)) {
+      settodos(storedTodos);
+    }
+  }, []);
+
   useEffect(() => {
-    console.log("Updated todos:", todos);
-    // save_db(todos);
-  }, [todos]);
-  const save_db = (todos) => {
-    // console.log(todos);
+    console.log("Saving todos:", todos); // Debugging statement
     localStorage.setItem("todos", JSON.stringify(todos));
-  };
+  }, [todos]);
+
   const handleEdit = (index) => {
     settodo(todos[index].todo);
     setEditIndex(index);
-    // save_db(todos);
+    save_db();
   };
   const handleDelete = (index) => {
     const newTodos = todos.filter((_, i) => i !== index); // Remove todo by index
     settodos(newTodos);
-    // save_db(newTodos);
+    save_db();
   };
   const inputChange = (e) => {
     settodo(e.target.value);
@@ -34,22 +35,21 @@ const TODO = () => {
     let newTodos = [...todos];
     newTodos[index].isCompleted = !newTodos[index].isCompleted; // Toggle isCompleted
     settodos(newTodos);
-    // save_db(newTodos);
+    save_db();
   };
-  const handleAdd = async() => {
+  const handleAdd = () => {
     if (todo.trim() === "") return;
-    // else if (editIndex !== null) {
-    //   let updatedTodos = [...todos];
-    //   updatedTodos[editIndex].todo = todo;
-    //   settodos(updatedTodos);
-    //   setEditIndex(null);
-    // } 
-    else {
-    await settodos([...todos, { todo, isCompleted: false }]);
-    // console.log(todos)
+    else if (editIndex !== null) {
+      let updatedTodos = [...todos];
+      updatedTodos[editIndex].todo = todo;
+      settodos(updatedTodos);
+      setEditIndex(null);
+    } else {
+      settodos([...todos, { todo, isCompleted: false }]);
+      // console.log(todo);
     }
     settodo("");
-    save_db(todos);
+    // save_db();
   };
 
   return (
