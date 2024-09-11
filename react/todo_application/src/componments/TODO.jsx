@@ -1,44 +1,55 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 
 const TODO = () => {
   const [todos, settodos] = React.useState([]);
   const [todo, settodo] = React.useState("");
-  const [editIndex, setEditIndex] = React.useState(null); 
+  const [editIndex, setEditIndex] = React.useState(null);
 
-
-  const handleEdit = (index) => {
-    settodo(todos[index].todo); // Populate the input field with the current todo
-    setEditIndex(index); // Set edit index to the current todo being edited
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos"));
+    if (storedTodos) settodos(storedTodos);
+  },[]);
+  useEffect(() => {
+    console.log("Updated todos:", todos);
+    // save_db(todos);
+  }, [todos]);
+  const save_db = (todos) => {
+    // console.log(todos);
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
-
+  const handleEdit = (index) => {
+    settodo(todos[index].todo);
+    setEditIndex(index);
+    // save_db(todos);
+  };
   const handleDelete = (index) => {
     const newTodos = todos.filter((_, i) => i !== index); // Remove todo by index
     settodos(newTodos);
+    // save_db(newTodos);
   };
-
   const inputChange = (e) => {
     settodo(e.target.value);
   };
-
   const handle_checkbox = (index) => {
     let newTodos = [...todos];
     newTodos[index].isCompleted = !newTodos[index].isCompleted; // Toggle isCompleted
     settodos(newTodos);
+    // save_db(newTodos);
   };
-
-  const handleAdd = () => {
+  const handleAdd = async() => {
     if (todo.trim() === "") return;
-    else if (editIndex !== null) {
-      // Editing mode: update the existing todo
-      let updatedTodos = [...todos];
-      updatedTodos[editIndex].todo = todo;
-      settodos(updatedTodos);
-      setEditIndex(null); // Reset edit mode
-    } else {
-      // Adding a new todo
-      settodos([...todos, { todo, isCompleted: false }]);
+    // else if (editIndex !== null) {
+    //   let updatedTodos = [...todos];
+    //   updatedTodos[editIndex].todo = todo;
+    //   settodos(updatedTodos);
+    //   setEditIndex(null);
+    // } 
+    else {
+    await settodos([...todos, { todo, isCompleted: false }]);
+    // console.log(todos)
     }
-    settodo("")
+    settodo("");
+    save_db(todos);
   };
 
   return (
@@ -64,7 +75,7 @@ const TODO = () => {
           <div key={index} className="flex">
             <div className="flex items-center gap-2">
               <input
-                onClick={() => handle_checkbox(index)}
+                onChange={() => handle_checkbox(index)}
                 id={`checkbox-${index}`}
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-blue-700"
