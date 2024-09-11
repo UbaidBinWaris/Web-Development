@@ -3,24 +3,8 @@ import React from "react";
 const TODO = () => {
   const [todos, settodos] = React.useState([]);
   const [todo, settodo] = React.useState("");
-  const [editIndex, setEditIndex] = React.useState(null); // Track the index of the todo being edited
+  const [editIndex, setEditIndex] = React.useState(null); 
 
-  const handleAdd = () => {
-    if (todo.trim() === "") return;
-
-    if (editIndex !== null) {
-      // Editing mode: update the existing todo
-      let updatedTodos = [...todos];
-      updatedTodos[editIndex].todo = todo;
-      settodos(updatedTodos);
-      setEditIndex(null); // Reset edit mode
-    } else {
-      // Adding a new todo
-      settodos([...todos, { todo, isCompleted: false }]);
-    }
-
-    settodo(""); // Clear the input field
-  };
 
   const handleEdit = (index) => {
     settodo(todos[index].todo); // Populate the input field with the current todo
@@ -40,6 +24,21 @@ const TODO = () => {
     let newTodos = [...todos];
     newTodos[index].isCompleted = !newTodos[index].isCompleted; // Toggle isCompleted
     settodos(newTodos);
+  };
+
+  const handleAdd = () => {
+    if (todo.trim() === "") return;
+    else if (editIndex !== null) {
+      // Editing mode: update the existing todo
+      let updatedTodos = [...todos];
+      updatedTodos[editIndex].todo = todo;
+      settodos(updatedTodos);
+      setEditIndex(null); // Reset edit mode
+    } else {
+      // Adding a new todo
+      settodos([...todos, { todo, isCompleted: false }]);
+    }
+    settodo("")
   };
 
   return (
@@ -73,7 +72,9 @@ const TODO = () => {
               />
             </div>
             <div className="flex gap-3 py-2 w-5/6 m-auto my-2 justify-between border bg-gray-800 rounded-xl">
-              <span className={`px-5 ${item.isCompleted ? "line-through" : ""}`}>
+              <span
+                className={`px-5 ${item.isCompleted ? "line-through" : ""}`}
+              >
                 {item.todo}
               </span>
               <div className="but flex gap-3 px-4">
