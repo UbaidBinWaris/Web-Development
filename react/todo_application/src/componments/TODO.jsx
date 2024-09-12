@@ -5,19 +5,15 @@ const TODO = () => {
   const [todo, settodo] = React.useState("");
   const [editIndex, setEditIndex] = React.useState(null);
 
-  // Effect to load todos from localStorage
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
     if (storedTodos && Array.isArray(storedTodos)) {
       settodos(storedTodos);
     }
   }, []);
-
-  useEffect(() => {
-    console.log("Saving todos:", todos); // Debugging statement
+  let save_db = () =>{
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
+  };
   const handleEdit = (index) => {
     settodo(todos[index].todo);
     setEditIndex(index);
@@ -49,7 +45,7 @@ const TODO = () => {
       // console.log(todo);
     }
     settodo("");
-    // save_db();
+    save_db();
   };
 
   return (
@@ -71,7 +67,14 @@ const TODO = () => {
         </button>
       </div>
       <div className="todos">
+        if(todos.length == 0){
+          <p>No tasks found</p>
+        }
+        else{
         {todos.map((item, index) => (
+          return{
+            
+          }
           <div key={index} className="flex">
             <div className="flex items-center gap-2">
               <input
@@ -105,6 +108,7 @@ const TODO = () => {
             </div>
           </div>
         ))}
+      }
       </div>
     </div>
   );
