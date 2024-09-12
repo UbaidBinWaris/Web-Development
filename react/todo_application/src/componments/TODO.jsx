@@ -72,9 +72,6 @@ const TODO = () => {
         }
         else{
         {todos.map((item, index) => (
-          return{
-            
-          }
           <div key={index} className="flex">
             <div className="flex items-center gap-2">
               <input
