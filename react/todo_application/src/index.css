@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+*{
   color: White;
+  font-family: "Roboto", system-ui;
 }

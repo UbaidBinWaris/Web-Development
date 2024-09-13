@@ -11,7 +11,7 @@ const TODO = () => {
       settodos(storedTodos);
     }
   }, []);
-  let save_db = () =>{
+  let save_db = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
   const handleEdit = (index) => {
@@ -67,45 +67,44 @@ const TODO = () => {
         </button>
       </div>
       <div className="todos">
-        if(todos.length == 0){
-          <p>No tasks found</p>
-        }
-        else{
-        {todos.map((item, index) => (
-          <div key={index} className="flex">
-            <div className="flex items-center gap-2">
-              <input
-                onChange={() => handle_checkbox(index)}
-                id={`checkbox-${index}`}
-                type="checkbox"
-                className="form-checkbox h-5 w-5 text-blue-700"
-                checked={item.isCompleted}
-              />
-            </div>
-            <div className="flex gap-3 py-2 w-5/6 m-auto my-2 justify-between border bg-gray-800 rounded-xl">
-              <span
-                className={`px-5 ${item.isCompleted ? "line-through" : ""}`}
-              >
-                {item.todo}
-              </span>
-              <div className="but flex gap-3 px-4">
-                <button
-                  onClick={() => handleEdit(index)}
-                  className="bg-yellow-500 rounded-md py-1 px-3"
+        {todos.length === 0 ? (
+          <p className="w-full text-white flex items-center justify-center m-5 text-xl font-bold">No tasks found</p>
+        ) : (
+          todos.map((item, index) => (
+            <div key={index} className="flex">
+              <div className="flex items-center gap-2">
+                <input
+                  onChange={() => handle_checkbox(index)}
+                  id={`checkbox-${index}`}
+                  type="checkbox"
+                  className="form-checkbox h-5 w-5 text-blue-700"
+                  checked={item.isCompleted}
+                />
+              </div>
+              <div className="flex gap-3 py-2 w-5/6 m-auto my-2 justify-between border bg-gray-800 rounded-xl">
+                <span
+                  className={`px-5 ${item.isCompleted ? "line-through" : ""}`}
                 >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(index)}
-                  className="bg-red-500 rounded-md py-1 px-3"
-                >
-                  Delete
-                </button>
+                  {item.todo}
+                </span>
+                <div className="but flex gap-3 px-4">
+                  <button
+                    onClick={() => handleEdit(index)}
+                    className="bg-yellow-500 rounded-md py-1 px-3"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(index)}
+                    className="bg-red-500 rounded-md py-1 px-3"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      }
+          ))
+        )}
       </div>
     </div>
   );
