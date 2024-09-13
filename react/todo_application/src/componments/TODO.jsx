@@ -70,6 +70,12 @@ const TODO = () => {
         {todos.length === 0 ? (
           <p className="w-full text-white flex items-center justify-center m-5 text-xl font-bold">No tasks found</p>
         ) : (
+          <div className="flex inline-flex">
+                <input type="checkbox" name="" id="" />
+                View Finished Tasks
+              </div>
+              {todos.filter((item) =>!item.isCompleted).map((item, index) => (
+                <div key={index} className="flex">
           todos.map((item, index) => (
             <div key={index} className="flex">
               <div className="flex items-center gap-2">
