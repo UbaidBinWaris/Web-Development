@@ -120,13 +120,15 @@ const TODO = () => {
               />
               <span className="flex gap-2 px-3">Show Finished Task</span>
             </div>
-            {
-              finished
-              ? {displayTodos(todos.filter((item)=>item.isCompleted).length === 0 
-              ? <span>No Finished Tasks</span> 
-              : displayTodos(todos.filter((item) => item.isCompleted)}
-              : displayTodos(todos)
-            }
+            {finished ? (
+              todos.filter((item) => item.isCompleted).length === 0 ? (
+                <span className="flex w-full items-center justify-center text-2xl font-bold text-red-700 my-6">No Finished Tasks</span>
+              ) : (
+                displayTodos(todos.filter((item) => item.isCompleted))
+              )
+            ) : (
+              displayTodos(todos)
+            )}
           </>
         )}
       </div>
