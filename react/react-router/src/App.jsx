@@ -4,19 +4,31 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './componments/Navbar'
 import { createBrowserRouter , RouterProvider } from'react-router-dom'
-// import About from './pages/About'
+import About from './componments/About'
 import Home from './componments/Home'
+import Contact from './componments/Contact'
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/home',
-      element : <Home/>
+      path: '/',
+      element : <><Navbar/></>
+    },
+    {
+      path: '/Home',
+      element : <><Navbar/> <Home/></>
+    },
+    {
+      path: '/About',
+      element : <><Navbar/> <About/></>
+    },
+    {
+      path: '/Contact',
+      element : <><Navbar/> <Contact/></>
     }
   ])
   return (
     <>
-      <Navbar/>
       <RouterProvider router={router} />
     </>
   )
