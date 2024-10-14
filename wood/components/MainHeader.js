@@ -16,7 +16,7 @@ const MainHeader = () => {
           height={300}
         />
         <nav className="flex ">
-          <ul className="flex gap-4">
+          <ul className="flex gap-5">
             <li>
               <a
                 className="hover:text-[#F9940A] tracking-wide text-[16px]"
