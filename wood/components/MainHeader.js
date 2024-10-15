@@ -6,7 +6,7 @@ const MainHeader = () => {
   return (
     <>
       <div className="bg-[#65360D]">
-        <div className="flex h-10 rounded-t-lg bg-black"></div>
+        <div className="flex h-10 rounded-t-3xl bg-black"></div>
       </div>
       <header className="bg-slate-200 flex justify-between items-center py-2 px-16">
         <Image
