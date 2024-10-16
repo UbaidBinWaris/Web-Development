@@ -6,16 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function AutoPlayMethods() {
-  let sliderRef = useRef(null);
-  const play = () => {
-    sliderRef.slickPlay();
-  };
-  const pause = () => {
-    sliderRef.slickPause();
-  };
-}
-const ProductCard = () => {
+const InfoCard = () => {
   const data = [
     { id: 1, image: "/chair.webp", title: "Product 1", price: 19.99 },
     { id: 2, image: "/chair.webp", title: "Product 2", price: 29.99 },
@@ -30,14 +21,13 @@ const ProductCard = () => {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 4,
     slidesToScroll: 1,
     swipeToSlide: true,
     pauseOnHover: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    autoplay: false,
     nextArrow: (
       <div>
         <div className="next-slick-arrow flex m-auto justify-center">
@@ -74,7 +64,7 @@ const ProductCard = () => {
             <div key={item.id} className="p-4">
               <div>
                 <Image
-                  className="m-auto p-1 justify-center rounded-[50px]"
+                  className="m-auto p-1 justify-center rounded-xl"
                   src={item.image}
                   alt={item.title}
                   width={200}
@@ -92,4 +82,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default InfoCard;
