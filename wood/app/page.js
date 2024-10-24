@@ -12,6 +12,15 @@ export default function Home() {
       <ProductCard />
       <h1 className="flex text-center items-center justify-center text-2xl font-bold">Collection</h1>
       <InfoCard/>
+      <h1 className="flex text-center items-center justify-center text-2xl font-bold">Collection</h1>
+      <InfoCard/>
+      <h1 className="flex text-center items-center justify-center text-2xl font-bold">Collection</h1>
+      <InfoCard/>
+      <h1 className="flex text-center items-center justify-center text-2xl font-bold">Collection</h1>
+      <InfoCard/>
+      <h1 className="flex text-center items-center justify-center text-2xl font-bold">Collection</h1>
+      <InfoCard/>
+      
 
     </div>
   );

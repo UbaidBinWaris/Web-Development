@@ -67,7 +67,7 @@ const InfoCard = () => {
                   className="m-auto p-1 justify-center rounded-xl"
                   src={item.image}
                   alt={item.title}
-                  width={200}
+                  width={300}
                   height={200}
                 />
                 <div className="text-center mt-4">
