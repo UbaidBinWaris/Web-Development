@@ -37,6 +37,7 @@ const ProductCard = () => {
     swipeToSlide: true,
     pauseOnHover: true,
     autoplay: true,
+    // arrow:false,
     autoplaySpeed: 2000,
     nextArrow: (
       <div>

@@ -21,7 +21,7 @@ const InfoCard = () => {
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -35,7 +35,7 @@ const InfoCard = () => {
             className="rounded-full"
             src="/svg/righ.svg"
             alt="Next Arrow"
-            width={50} // Adjust size as needed
+            width={50}
             height={50}
           />
         </div>
