@@ -1,5 +1,5 @@
 // import the Request and Response classes
-
+import mysql from  'mysql2/promise';
 import { NextResponse, NextRequest } from 'next/server'
 
 // define and export the GET handler function
