@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "@/app/globals.css";
-export const LibraryTable = () => {
+export const ScheduleTable = () => {
   const [studentData, setStudentData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // Added state for search term
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalType, setModalType] = useState(""); // 'insert', 'update', 'delete'
+
   const openModal = (type) => {
     setModalType(type);
     setIsModalOpen(true);
@@ -21,7 +22,7 @@ export const LibraryTable = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch("/api/get-library");
+        const response = await fetch("/api/get_schedule");
         const result = await response.json();
         setStudentData(result);
       } catch (error) {
@@ -39,11 +40,11 @@ export const LibraryTable = () => {
         <table className="min-w-full rounded-lg bg-white shadow-md border border-gray-300">
           <thead>
             <tr className="bg-gray-800 text-white text-left rounded-t-lg">
-              <th className="px-6 py-3 border-b border-gray-500">Book ID</th>
-              <th className="px-6 py-3 border-b border-gray-500">Title</th>
-              <th className="px-6 py-3 border-b border-gray-500">Aurthor</th>
-              <th className="px-6 py-3 border-b border-gray-500">Status</th>
-              <th className="px-6 py-3 border-b border-gray-500">ISBN</th>
+              <th className="px-6 py-3 border-b border-gray-500">Room Number</th>
+              <th className="px-6 py-3 border-b border-gray-500">Instructor</th>
+              <th className="px-6 py-3 border-b border-gray-500">Course</th>
+              <th className="px-6 py-3 border-b border-gray-500">Day</th>
+              <th className="px-6 py-3 border-b border-gray-500">Time</th>
             </tr>
           </thead>
           <tbody>
@@ -54,24 +55,18 @@ export const LibraryTable = () => {
                 </td>
               </tr>
             ) : studentData.length > 0 ? (
-              studentData.map((library) => (
+              studentData.map((schedule) => (
                 <tr
-                  key={library.book_id}
+                  key={schedule.schedule_id}
                   className="hover:bg-gray-100 transition-colors duration-200 text-black"
                 >
-                  <td className="px-6 py-4 border-b">{library.book_id}</td>
-                  <td className="px-6 py-4 border-b">{library.title}</td>
-                  <td className="px-6 py-4 border-b">{library.author}</td>
-                  <td
-                    className={`px-6 py-4 border-b ${
-                      library.status === "Available"
-                        ? "text-green-500"
-                        : "text-yellow-500"
-                    }`}
-                  >
-                    {library.status}
+                  <td className="px-6 py-4 border-b">{schedule.room_id}</td>
+                  <td className="px-6 py-4 border-b">{schedule.first_name} {schedule.last_name}</td>
+                  <td className="px-6 py-4 border-b">{schedule.course_name}</td>
+                  <td className="px-6 py-4 border-b">{schedule.day}</td>
+                  <td className="px-6 py-4 border-b">
+                    {schedule.start_time} - {schedule.end_time}
                   </td>
-                  <td className="px-6 py-4 border-b">{library.isbn}</td>
                 </tr>
               ))
             ) : (
@@ -88,4 +83,4 @@ export const LibraryTable = () => {
   );
 };
 
-export default LibraryTable;
+export default ScheduleTable;
