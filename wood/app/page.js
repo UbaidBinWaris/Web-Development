@@ -1,3 +1,4 @@
+// 'use client';
 import Image from "next/image";
 import MainHeader from "@/components/MainHeader";
 import TitlePhoto from "@/components/title_photo";
