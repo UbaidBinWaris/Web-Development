@@ -2,14 +2,15 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getNavLinks } from "./navData";
+import { getNavLinks  } from "./constants/my_local_data";
 
 export const Header = () => {
   const navItems = getNavLinks();
 
+
   return (
     <header>
-      <nav className="flex items-center justify-between px-4 sm:px-3 md:px-10 lg:px-20 py-14 mx-16 sm:mx-10 width-full">
+      <nav className="flex items-center justify-between sm:px-1 md:px-10 lg:px-20 py-14 mx-10  width-full">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image

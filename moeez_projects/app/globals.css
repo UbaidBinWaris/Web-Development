@@ -1,1 +1,35 @@
+/* styles/globals.css or styles/tailwind.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
+
 @import "tailwindcss";
+
+
+* {
+    
+    scroll-behavior: smooth;
+  }
+
+
+@layer base {
+  :root {
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Palanquin', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-primary);
+  }
+}
+
+
+@layer utilities {
+    .font-primary {
+      font-family: var(--font-primary);
+    }
+  
+    .font-secondary {
+      font-family: var(--font-secondary);
+    }
+  }
+  

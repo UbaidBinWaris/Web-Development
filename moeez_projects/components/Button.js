@@ -6,7 +6,7 @@ export const Button = ({
     iconURL,
   }) => {
   return (
-    <button className='flex justify-center items-center gap-2 px-7 py-4 border font-montserrat text-lg leading-none'>
+    <button className='flex justify-center items-center gap-2 px-6 py-4  font-primary bg-orange-500 rounded-full text-lg leading-none'>
         {label}
         {iconURL && (
             <Image
@@ -14,7 +14,7 @@ export const Button = ({
                 alt="arrow"
                 width={20}
                 height={20}
-                className='ml-2 rounded-full bg-white w-5 h-5'
+                className='ml-2 rounded-full bg-orange-500 w-5 h-5'
             />
         )}
     </button>
