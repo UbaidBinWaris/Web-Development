@@ -6,8 +6,12 @@ let intervalId;
 let currentSongIndex;
 let songLinks = [];
 let folder;
+
+const url = "http://127.0.0.1:5500/Frontend/Spotify";
+
+
 async function get_song_links(folder) {
-  let a = await fetch(`http://127.0.0.1:5500/Spotify/Music/${folder}`);
+  let a = await fetch(`${url}/Music/${folder}`);
   // console.log(folder);
   let responce = await a.text();
 
@@ -85,24 +89,24 @@ async function volume() {
     playing_song.volume = sliderValue;
     if (playing_song.volume == 0) {
       vol.firstElementChild.src =
-        "http://127.0.0.1:5500/Spotify/music_image/mute.svg";
+        "${url}/music_image/mute.svg";
     } else if (playing_song.volume > 0.5) {
       vol.firstElementChild.src =
-        "http://127.0.0.1:5500/Spotify/music_image/high_volume.svg";
+        "${url}/music_image/high_volume.svg";
     } else {
       vol.firstElementChild.src =
-        "http://127.0.0.1:5500/Spotify/music_image/low_volume.svg";
+        "${url}/music_image/low_volume.svg";
     }
   });
   if (vol) {
     vol.addEventListener("click", () => {
       if (
         vol.firstElementChild.src !=
-        "http://127.0.0.1:5500/Spotify/music_image/mute.svg"
+        "${url}/music_image/mute.svg"
       ) {
         temp = vol.firstElementChild.src;
         vol.firstElementChild.src =
-          "http://127.0.0.1:5500/Spotify/music_image/mute.svg";
+          "${url}/music_image/mute.svg";
         sound_value = playing_song.volume;
         playing_song.volume = 0;
       } else {
@@ -130,7 +134,7 @@ function playSongAtIndex(i) {
   currentSongIndex = i;
 
   playing_song.pause();
-  playing_song.src = `http://127.0.0.1:5500/Spotify/Music/${folder}/${songLinks[i]}`;
+  playing_song.src = `${url}/Music/${folder}/${songLinks[i]}`;
   playing_song.play();
   musicbar();
 
@@ -324,10 +328,10 @@ async function load_and_display_card(card) {
   const cardContainer = document.querySelector(".card-cointainer");
 
   for (let i = 0; i < card.length; i++) {
-    const imgSrc = `http://127.0.0.1:5500/Spotify/Music/${card[i]}/Image.jpg`;
+    const imgSrc = `${url}/Music/${card[i]}/Image.jpg`;
     const cardTitle = card[i];
     const cd = await fetch(
-      `http://127.0.0.1:5500/Spotify/Music/${card[i]}/description.txt`
+      `${url}/Music/${card[i]}/description.txt`
     );
     const cardDescription = await cd.text();
 
@@ -394,15 +398,17 @@ async function event_card(card) {
     });
   }
 }
+
+
 async function card_container() {
-  let a = await fetch(`http://127.0.0.1:5500/Spotify/Music`);
+  let a = await fetch(`${url}/Music`);
   let responce = await a.text();
   // console.log(a);
   let as = document.createElement("div");
   as.innerHTML = responce;
   let lik = as.querySelectorAll("a");
   let card = [];
-  // console.log(as);
+  console.log(as);
   lik.forEach((link) => {
     let href = link.getAttribute("href");
 
@@ -413,12 +419,19 @@ async function card_container() {
       card.push(x[1]);
     }
   });
-  // console.log(card);
+  console.log(card);
 
   await load_and_display_card(card);
   await event_card(card);
   document.querySelector(".pointer").style.left = "0%";
 }
+
+
+
+
+
+
+
 async function main() {
   await card_container();
   next_previous();
@@ -429,3 +442,8 @@ async function main() {
 }
 
 main();
+
+
+
+
+
